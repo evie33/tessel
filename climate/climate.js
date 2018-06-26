@@ -13,27 +13,26 @@ var accellib = require('accel-mma84')
 var climate = climatelib.use(tessel.port['B']);
 var accel = accellib.use(tessel.port['A']);
 
-// climate.on('ready', function () {
-//  console.log('Connected to climate module');
+climate.on('ready', function () {
+ console.log('Connected to climate module');
 
-//  // Loop forever
-//  setImmediate(function loop () {
-//    climate.readTemperature('f', function (err, temp) {
-//      climate.readHumidity(function (err, humid) {
-//      console.log('Degrees:', temp.toFixed(4) + 'F', 'Humidity:', humid.toFixed(4) + '%RH');
-//      setTimeout(loop, 300);
-//      });
-//    });
-//  });
-// });
+ // Loop forever
+ setImmediate(function loop () {
+   climate.readTemperature('f', function (err, temp) {
+     climate.readHumidity(function (err, humid) {
+     console.log('Degrees:', temp.toFixed(4) + 'F', 'Humidity:', humid.toFixed(4) + '%RH');
+     setTimeout(loop, 300);
+     });
+   });
+ });
+});
 
-// climate.on('error', function(err) {
-//  console.log('error connecting module', err);
-// });
+climate.on('error', function(err) {
+ console.log('error connecting module', err);
+});
 
 
 
-// Initialize the accelerometer.
 accel.on('ready', function () {
 // Stream accelerometer data
 accel.on('data', function (xyz) {
@@ -47,3 +46,5 @@ accel.on('data', function (xyz) {
 accel.on('error', function(err){
  console.log('Error:', err);
 });
+
+
